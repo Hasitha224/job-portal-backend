@@ -41,6 +41,7 @@ const login = (req,res)=>{
                     const { isAdmin } = selectedUser;
                     const payLoad = {
                         email : selectedUser.email,
+                        isAdmin: isAdmin
                     }
                     const secretKey = process.env.SECRET_KEY;
                     const expiresIn = '24h';
