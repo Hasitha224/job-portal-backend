@@ -8,6 +8,7 @@ const port = process.env.SERVER_PORT || 3001;
 const app = express();
 
 const userRoute = require('./routes/userRoutes');
+const vacancyRoute = require('./routes/vacancyRoutes');
 
 //allow requests from frontend domain
 const allowedOrigins = ['http://localhost:3000'];
@@ -36,6 +37,8 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 app.use('/users',userRoute);
+app.use('/vacancies',vacancyRoute);
+
 
 app.listen(port,()=>{
     console.log(`Server started and running on port ${port}`);
