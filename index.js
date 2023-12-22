@@ -9,7 +9,8 @@ const app = express();
 
 const userRoute = require('./routes/userRoutes');
 const vacancyRoute = require('./routes/vacancyRoutes');
-
+const applicationRoute = require('./routes/applicationRoutes');
+const publicRoute = require('./routes/publicRoute');
 //allow requests from frontend domain
 const allowedOrigins = ['http://localhost:3000'];
 app.use(cors({
@@ -38,7 +39,8 @@ app.use(bodyParser.json());
 
 app.use('/users',userRoute);
 app.use('/vacancies',vacancyRoute);
-
+app.use('/applications',applicationRoute);
+app.use('/public',publicRoute);
 
 app.listen(port,()=>{
     console.log(`Server started and running on port ${port}`);
