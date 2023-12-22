@@ -4,6 +4,7 @@ const nodemailer = require('nodemailer');
 const salt = 10;
 const jsonwebtoken = require('jsonwebtoken');
 const path = require('path');
+const applicationSchema = require('../models/applicationSchema');
 
 const imagePath = path.join(__dirname, '../utils/images/congrats.jpg');
 
@@ -69,8 +70,9 @@ const login = (req,res)=>{
                     return res.status(500).json({'message':'internal server error'});
                 }
                 if(result){
-                    const { isAdmin } = selectedUser;
+                    const { isAdmin, _id } = selectedUser;
                     const payLoad = {
+                        _id,
                         email : selectedUser.email,
                         isAdmin: isAdmin
                     }
@@ -91,4 +93,16 @@ const login = (req,res)=>{
     });
 }
 
-module.exports = {register,login};
+const statusOfApplications = async (req,res)=>{
+    try{
+        const userId = req.user._id;
+        const userStatus = await applicationSchema.find({user_id: userId});
+        res.json(userStatus); 
+    }catch(error){
+        console.error('Error fetching data: ',error);
+        return res.status(500).json({'message':'internal server error'});
+    }
+
+}
+
+module.exports = {register,login,statusOfApplications};

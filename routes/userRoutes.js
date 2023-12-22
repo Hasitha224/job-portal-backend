@@ -5,7 +5,5 @@ const router = express.Router();
 
 router.post('/signup',userController.register);
 router.post('/login',userController.login);
-router.get('/uservacancy',verifyToken);
-router.get('/apply',verifyToken);
-router.get('/status',verifyToken);
+router.get('/status',verifyToken,userController.statusOfApplications);
 module.exports = router;
