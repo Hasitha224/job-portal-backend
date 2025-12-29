@@ -12,7 +12,7 @@ const vacancyRoute = require('./routes/vacancyRoutes');
 const applicationRoute = require('./routes/applicationRoutes');
 const publicRoute = require('./routes/publicRoute');
 //allow requests from frontend domain
-const allowedOrigins = ['http://localhost:3000'];
+const allowedOrigins = ['http://localhost:3000', 'https://job-portal-system-sgln.onrender.com'];
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin) return callback(null, true);
