@@ -3,6 +3,7 @@ const router = express.Router();
 const applicationController = require('../controllers/applicationController');
 const verifyToken = require('../Middleware/authMiddleware');
 
+// all the routes
 router.post('/create',verifyToken,applicationController.submitApplication);
 router.get('/getByPending',applicationController.getPending);
 router.get('/getByAccepted',applicationController.getAccepted);
