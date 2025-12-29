@@ -23,39 +23,39 @@ const register = (req,res)=>{
                     isAdmin:req.body.isAdmin
                 });
 
-                const transporter = nodemailer.createTransport({
-                    service:'gmail',
-                    auth:{
-                        user:'testhasi97@gmail.com',
-                        pass:'esfb eiat pfrw aoqw',
-                    }
-                });
+                // const transporter = nodemailer.createTransport({
+                //     service:'gmail',
+                //     auth:{
+                //         user:'testhasi97@gmail.com',
+                //         pass:'esfb eiat pfrw aoqw',
+                //     }
+                // });
 
-                const mailOption = {
-                    from:'SLT Job-Portal <testhasi97@gmail.com>',
-                    to:req.body.email,
-                    subject:'New Account Creation',
-                    // text:'Congraluations, you have successfully created your account at SLT Job Portal System.'
-                    html: `<h2>Congratulations, you have successfully created your account at SLT Job Portal System.</h2><img src="cid:unique-image-id" alt="Congrats Image">`,
-                    attachments: [{
-                        filename: 'congrats.jpg',
-                        path: imagePath,
-                        cid: 'unique-image-id'  // Unique ID for referencing the image in the HTML
-                    }]
-                }
+                // const mailOption = {
+                //     from:'SLT Job-Portal <testhasi97@gmail.com>',
+                //     to:req.body.email,
+                //     subject:'New Account Creation',
+                //     // text:'Congraluations, you have successfully created your account at SLT Job Portal System.'
+                //     html: `<h2>Congratulations, you have successfully created your account at SLT Job Portal System.</h2><img src="cid:unique-image-id" alt="Congrats Image">`,
+                //     attachments: [{
+                //         filename: 'congrats.jpg',
+                //         path: imagePath,
+                //         cid: 'unique-image-id'  // Unique ID for referencing the image in the HTML
+                //     }]
+                // }
 
-                transporter.sendMail(mailOption,function (error,info){
-                    if(error){
-                        return res.status(500).json({'error':error});
-                    } else{
+                // transporter.sendMail(mailOption,function (error,info){
+                //     if(error){
+                //         return res.status(500).json({'error':error});
+                //     } else{
                         user.save().then(saveResponse=>{
                             res.status(201).json({"message":'Saved'})
                         }).catch(error=>{
                             res.status(500).json(error);
                         });
-                    }
+                    
                 })
-            })
+            
         }else{
             return res.status(409).json({'error': 'already existing user'});
         }
